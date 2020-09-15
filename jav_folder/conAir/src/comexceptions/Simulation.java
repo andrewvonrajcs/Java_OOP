@@ -1,0 +1,54 @@
+package comexceptions;
+
+import java.util.Scanner;
+
+public class Simulation {
+    
+    public static void Main(String[] args) {
+        
+        try{
+            getInput();
+        } catch(EvenNumberExceptions e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void getInput() throws EvenNumberExceptions {
+    Scanner in = new Scanner(System.in);
+    
+
+    //get input from user
+
+    System.out.println("Type in a number and press Enter...");
+
+    String line = in.nextLine();
+
+    System.out.println("You've typed: " + line);
+
+    //test if number is even, throw exception if true
+
+    if (isEven(line)) {
+        try{
+
+        throw new EvenNumberExceptions();
+        } finally {
+            in.close();
+        }  
+      }
+  
+    //close resources
+
+    in.close();
+
+    }
+
+  public static boolean isEven(String num) {
+
+    //convert value to a number
+
+    int value = Integer.parseInt(num);
+
+    return (value % 2 == 0);
+
+  }
+}
